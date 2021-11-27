@@ -1,4 +1,15 @@
-from models import Pessoas
+from models import Pessoas, Usuarios
+
+
+def insere_usuarios(login, senha):
+    usuarios = Usuarios(login=login, senha=senha)
+    print(usuarios)
+    usuarios.save()
+
+
+def busca_todos_usuarios():
+    usuarios = Usuarios.query.all()
+    print(usuarios)
 
 
 def insere_pesssoa():
@@ -30,4 +41,7 @@ if __name__ == '__main__':
     # insere_pesssoa()
     # altera_pessoa()
     # consulta_pessoas()
-    exclui_pessoa()
+    # exclui_pessoa()
+    #insere_usuarios('Rock', '1234')
+    busca_todos_usuarios()
+

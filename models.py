@@ -1,5 +1,6 @@
+from os import SEEK_CUR, set_inheritable
+from random import lognormvariate
 from sqlalchemy import create_engine, Column, Integer, String, ForeignKey
-from sqlalchemy.engine import base
 from sqlalchemy.orm import scoped_session, sessionmaker, relationship
 from sqlalchemy.ext.declarative import declarative_base
 
@@ -38,6 +39,24 @@ class Atividades(Base):
 
     def __repr__(self):
         return '<Atividades {}>'. format(self.nome)
+
+    def save(self):
+        db_session.add(self)
+        db_session.commit()
+
+    def delete(self):
+        db_session.delete(self)
+        db_session.commit()
+
+
+class Usuarios(Base):
+    __tablename__ = 'tb_Usuarios'
+    id = Column(Integer, primary_key=True)
+    login = Column(String(30), unique=True)
+    senha = Column(String(30))
+
+    def __repr__(self):
+        return '<Usuarios {}'.format(self.login)
 
     def save(self):
         db_session.add(self)
